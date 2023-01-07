@@ -6,6 +6,13 @@ export class BreedSelect extends Component {
         breeds: [],
     };
     
+    async componentDidMount() {
+        try {
+            const response = await fetchBreeds();
+            // console.log(response);
+            this.setState({ breeds });
+        } catch (error){}
+    }
     render() {
         return <div>BreedSelect</div>;
     }
