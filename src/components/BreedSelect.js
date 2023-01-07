@@ -13,11 +13,16 @@ export class BreedSelect extends Component {
             this.setState({ breeds });
         } catch (error){}
     }
-    render() {
-        const options = this.state.breeds.map(breed => ({
+
+    makeOptions = () => {
+        return this.state.breeds.map(breed => ({
             value: breed.id,
             label: breed.name
-        }))
+        }));
+    }
+
+    render() {
+        const options = this.makeOptions();
         return (
             <div>
                 <Select
