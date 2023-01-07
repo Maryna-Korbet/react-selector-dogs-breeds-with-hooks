@@ -1,3 +1,4 @@
+import { fetchDogByBreed } from "api";
 import { Component } from "react";
 import { BreedSelect } from "./BreedSelect";
 import { Layout } from "./Layout";
@@ -5,11 +6,14 @@ import { Layout } from "./Layout";
 
 export class App extends Component {
   state = {
-    selectedBreed: null,
+    dog: null,
   }
 
-  selectedBreed = breedId => {
-    console.log(breedId);
+  selectedBreed = async breedId => {
+    try {
+      const dog = await fetchDogByBreed(breedId);
+      this.setState({ dog });
+    } catch (error) {}
   }
 
   render() {
