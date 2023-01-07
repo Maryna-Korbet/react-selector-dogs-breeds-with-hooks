@@ -5,17 +5,21 @@ import { fetchBreeds } from "api";
 export class BreedSelect extends Component {
     state = {
         breeds: [],
+        isLoading: false,
         error: null,
     };
     
     async componentDidMount() {
         try {
+            this.setState({ isLoading: true });
             const breeds = await fetchBreeds();
             this.setState({ breeds });
-        } catch (error) {
+        } catch {
             this.setState({
-                error: 'Error. Try reloading the page.'
+                error: 'Error. Try reloading the page.',
             });
+        } finally {
+            this.setState({ isLoading: false });
         }
     }
 
@@ -27,7 +31,9 @@ export class BreedSelect extends Component {
     }
 
     render() {
+        const { error } = this.state;
         const options = this.makeOptions();
+
         return (
             <div>
                 <Select
@@ -36,6 +42,7 @@ export class BreedSelect extends Component {
                         console.log(option);
                     }}
                 />
+                {error && <p style={{color: 'red'}}>{error}</p>}
             </div>
         );
     }
