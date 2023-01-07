@@ -5,13 +5,18 @@ import { fetchBreeds } from "api";
 export class BreedSelect extends Component {
     state = {
         breeds: [],
+        error: null,
     };
     
     async componentDidMount() {
         try {
             const breeds = await fetchBreeds();
             this.setState({ breeds });
-        } catch (error){}
+        } catch (error) {
+            this.setState({
+                error: 'Error. Try reloading the page.'
+            });
+        }
     }
 
     makeOptions = () => {
