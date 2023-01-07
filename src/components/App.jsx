@@ -4,10 +4,18 @@ import { Layout } from "./Layout";
 
 
 export class App extends Component {
+  state = {
+    selectedBreed: null,
+  }
+
+  selectedBreed = breedId => {
+    console.log(breedId);
+  }
+
   render() {
     return (
       <Layout>
-        <BreedSelect />
+        <BreedSelect onSelect={this.selectedBreed} />
       </Layout>
     );
   }

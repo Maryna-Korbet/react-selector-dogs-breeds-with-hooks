@@ -30,17 +30,20 @@ export class BreedSelect extends Component {
         }));
     }
 
+    handleChange = option => {
+        this.props.onSelect(option.value);
+    }
+
     render() {
-        const { error } = this.state;
+        const { error, isLoading } = this.state;
         const options = this.makeOptions();
 
         return (
             <div>
                 <Select
                     options={options}
-                    onChange={option => {
-                        console.log(option);
-                    }}
+                    onChange={this.handleChange}
+                    isLoading={isLoading}
                 />
                 {error && <p style={{color: 'red'}}>{error}</p>}
             </div>
