@@ -3,6 +3,7 @@ import { Component } from "react";
 import { BreedSelect } from "./BreedSelect";
 import { Layout } from "./Layout";
 import { Dog } from "./Dog";
+import { DogSkeleton } from "./DogSkeleton";
 
 export class App extends Component {
   state = {
@@ -32,7 +33,7 @@ export class App extends Component {
         <BreedSelect onSelect={this.selectedBreed} />
         {dog && !isLoading && <Dog dog={dog} breeds={this.breeds} />}
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        {isLoading && <div>LOADING...</div>}
+        {isLoading && <DogSkeleton />}
       </Layout>
     );
   }
