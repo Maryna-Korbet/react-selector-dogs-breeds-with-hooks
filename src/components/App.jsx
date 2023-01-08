@@ -2,7 +2,7 @@ import { fetchDogByBreed } from "api";
 import { Component } from "react";
 import { BreedSelect } from "./BreedSelect";
 import { Layout } from "./Layout";
-
+import { Dog } from "./Dog";
 
 export class App extends Component {
   state = {
@@ -13,7 +13,7 @@ export class App extends Component {
 
   selectedBreed = async breedId => {
     try {
-      this.setState({isLoading: true})
+      this.setState({ isLoading: true, error: null });
       const dog = await fetchDogByBreed(breedId);
       this.setState({ dog });
     } catch {
@@ -30,7 +30,7 @@ export class App extends Component {
     return (
       <Layout>
         <BreedSelect onSelect={this.selectedBreed} />
-        {dog && <img src={this.state.dog.url} alt="" width={600}/>}
+        {dog && !isLoading && <Dog dog={dog} breeds={this.breeds} />}
         {error && <p style={{ color: 'red' }}>{error}</p>}
         {isLoading && <div>LOADING...</div>}
       </Layout>
