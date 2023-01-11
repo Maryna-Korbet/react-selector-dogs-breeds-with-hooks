@@ -1,8 +1,8 @@
 {
-  "name": "react-selector-dogs-breeds",
+  "name": "react-selector-dogs-breeds-with-hooks",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Maryna-Korbet.github.io/react-selector-dogs-breeds/",
+  "homepage": "https://Maryna-Korbet.github.io/react-selector-dogs-breeds-with-hooks/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
