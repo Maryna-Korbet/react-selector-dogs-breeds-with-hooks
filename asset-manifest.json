@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/react-selector-dogs-breeds-with-hooks/static/css/main.c3d5249d.css",
-    "main.js": "/react-selector-dogs-breeds-with-hooks/static/js/main.53608806.js",
+    "main.js": "/react-selector-dogs-breeds-with-hooks/static/js/main.28c3d2a6.js",
     "index.html": "/react-selector-dogs-breeds-with-hooks/index.html",
     "main.c3d5249d.css.map": "/react-selector-dogs-breeds-with-hooks/static/css/main.c3d5249d.css.map",
-    "main.53608806.js.map": "/react-selector-dogs-breeds-with-hooks/static/js/main.53608806.js.map"
+    "main.28c3d2a6.js.map": "/react-selector-dogs-breeds-with-hooks/static/js/main.28c3d2a6.js.map"
   },
   "entrypoints": [
     "static/css/main.c3d5249d.css",
-    "static/js/main.53608806.js"
+    "static/js/main.28c3d2a6.js"
   ]
 }
