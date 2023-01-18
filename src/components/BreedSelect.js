@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Select from 'react-select'
 import { fetchBreeds } from "api";
 
@@ -11,8 +11,7 @@ export const BreedSelect = ({onSelect}) => {
         async function getBreeds() {
             try{
                 setIsLoading(true);
-                const breeds = await fetchBreeds();
-                setBreeds(breeds);
+                setBreeds(await fetchBreeds());
             }
             catch{
                 setError('Error. Try reloading the page.');
@@ -20,17 +19,16 @@ export const BreedSelect = ({onSelect}) => {
                 setIsLoading(false);
         }
         }
-
         getBreeds();
-    }, [])
- 
-    const makeOptions = () => {
+    }, []);
+    
+    const options = useMemo(() =>{
         return breeds.map(breed => ({
             value: breed.id,
-            label: breed.name
+            label: breed.name,
         }));
-    }
-
+    }, [breeds]);
+    
     const handleChange = option => {
         onSelect(option.value);
     };
@@ -38,7 +36,7 @@ export const BreedSelect = ({onSelect}) => {
         return (
             <div>
                 <Select
-                    options={makeOptions()}
+                    options={options}
                     onChange={handleChange}
                     isLoading={isLoading}
                 />
