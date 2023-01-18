@@ -2,6 +2,8 @@ import { useState, useEffect, useMemo } from "react";
 import Select from 'react-select'
 import { fetchBreeds } from "api";
 
+const ERROR_MESSAGE = 'Error. Try reloading the page.';
+
 export const BreedSelect = ({onSelect}) => {
     const [breeds, setBreeds] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +16,7 @@ export const BreedSelect = ({onSelect}) => {
                 setBreeds(await fetchBreeds());
             }
             catch{
-                setError('Error. Try reloading the page.');
+                setError(ERROR_MESSAGE);
             }finally {
                 setIsLoading(false);
         }
