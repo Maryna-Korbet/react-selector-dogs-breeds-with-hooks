@@ -1,52 +1,48 @@
-import { Component } from "react";
+import { useState, useEffect } from "react";
 import Select from 'react-select'
 import { fetchBreeds } from "api";
 
-export class BreedSelect extends Component {
-    state = {
-        breeds: [],
-        isLoading: false,
-        error: null,
-    };
-    
-    async componentDidMount() {
-        try {
-            this.setState({ isLoading: true });
-            const breeds = await fetchBreeds();
-            this.setState({ breeds });
-        } catch {
-            this.setState({
-                error: 'Error. Try reloading the page.',
-            });
-        } finally {
-            this.setState({ isLoading: false });
+export const BreedSelect = ({onSelect}) => {
+    const [breeds, setBreeds] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+  
+    useEffect(()=>{
+        async function getBreeds() {
+            try{
+                setIsLoading(true);
+                const breeds = await fetchBreeds();
+                setBreeds(breeds);
+            }
+            catch{
+                setError('Error. Try reloading the page.');
+            }finally {
+                setIsLoading(false);
         }
-    }
+        }
 
-    makeOptions = () => {
-        return this.state.breeds.map(breed => ({
+        getBreeds();
+    }, [])
+ 
+    const makeOptions = () => {
+        return breeds.map(breed => ({
             value: breed.id,
             label: breed.name
         }));
     }
 
-    handleChange = option => {
-        this.props.onSelect(option.value);
-    }
-
-    render() {
-        const { error, isLoading } = this.state;
-        const options = this.makeOptions();
+    const handleChange = option => {
+        onSelect(option.value);
+    };
 
         return (
             <div>
                 <Select
-                    options={options}
-                    onChange={this.handleChange}
+                    options={makeOptions()}
+                    onChange={handleChange}
                     isLoading={isLoading}
                 />
                 {error && <p style={{color: 'red'}}>{error}</p>}
             </div>
         );
     }
-}
